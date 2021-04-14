@@ -5,91 +5,6 @@
  	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <script>
-  // get a list of current astronauts from API endpoint
-  fetch('/astronauts/current')
-    .then(response => response.json())
-    .then( astronauts => {
-      for (person of astronauts.people){
-        display(person);
-      }
-      let number = astronauts.people.length;
-      document.getElementById("header").innerHTML +=
-      '<p>Our systems indicate that <span>'+number+'</span> humans are now hurtling around earth in a <a target="_blank" href="https://www.youtube.com/watch?v=KaOC9danxNo">tin can</a>.</p>'
-      console.log(number);
-    })
-    .catch(error => console.log(error) );
-
-  // for each astronaut, fetch and display a photo from Wiki
-  function display( astronaut ){
-    // search Wiki for articles matching "astronaut" + this name
-    // see also: https://www.mediawiki.org/wiki/API:Search
-    let theTerms = encodeURIComponent(astronaut.name+' astronaut');
-    fetch('https://en.wikipedia.org/w/api.php?origin=*'+
-            '&action=query&list=search&utf8=&format=json&prop=info&inprop=url'+
-            '&srsearch=' +  theTerms )
-    .then( response => response.json() )
-    .then( response => {
-
-      let title = response.query.search[0].title;
-      let pageId = response.query.search[0].pageid;
-      astronaut.pageId = pageId;
-      astronaut.title = title;
-      return title; // return the title of the first article
-    })
-    .then( title => {
-        // search for images inside this article
-        //see also: https://www.mediawiki.org/wiki/API:Images
-        return fetch(
-        'https://en.wikipedia.org/w/api.php?origin=*'+
-        '&action=query&prop=images&utf8=&format=json'+
-        '&titles=' + encodeURIComponent(title)) })
-    .then( response => { return response.json() })
-    .then( response => {
-      let id = Object.keys(response.query.pages)[0];
-      let page = response.query.pages[id];
-      let title = page.title;
-      for ( let img of page.images) {
-        if (img.title.includes('.jpg') ){
-          astronaut.imageTitle = img.title;
-          return img.title; // take the first jpg only
-        }
-      }
-    })
-    .then( imgTitle => {
-      // Get image info (i.e. URL) using the image title
-      // see also: https://www.mediawiki.org/wiki/API:Imageinfo
-      let theWidth = 750; // scale image to fit
-      return fetch(
-      'https://en.wikipedia.org/w/api.php?origin=*'+
-      '&action=query&prop=imageinfo&iiprop=url&iiurlwidth='+theWidth+'&utf8=&format=json'+
-      '&titles=' + encodeURIComponent( imgTitle )) })
-    .then(response => response.json() )
-    .then(response => {
-      let id = Object.keys(response.query.pages)[0];
-      let info = response.query.pages[id];
-      // url for thumbnail image:
-      astronaut.thumb = info.imageinfo[0].thumburl;
-      // url for full resolution image (not being used)
-      astronaut.url = info.imageinfo[0].url;
-
-      document.getElementById("astros").innerHTML +=
-        '<div class="container">'+
-          '<div class="avatar" '+
-            'style="background-image: url('+astronaut.thumb+');">'+
-        	'</div>'+
-        	'<div class="content">' +
-        		'<h2>'+
-              '<a href="http://en.wikipedia.org/?curid='+astronaut.pageId+'">'+
-                astronaut.title+
-              '</a>'+
-            '</h2>'+
-        		'<p>'+astronaut.craft+'</p>'+
-        	'</div>'+
-        '</div>';
-    });
-  }
-</script>
 <header id="header">
   <h1>Humans of Space</h1>
 </header>
@@ -98,4 +13,6 @@
 <footer id="footer">
   <p>Thanks to <a target="_blank" href="http://open-notify.org/Open-Notify-API/People-In-Space/">OpenNotify</a> for the astronaut data. Images via <a target="_blank" href="https://www.mediawiki.org/wiki/API:Images">MediaWiki</a></p>
 </footer>
+
+<script src="astronauts.js"></script>
 </body>
