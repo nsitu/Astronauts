@@ -28,7 +28,7 @@ const collection_name = 'astronauts';   // name of collection
 const options = {useUnifiedTopology: true}; // mongodb options
 
 // Set up a schedule to fetch new data daily
-cron.schedule('* * * * *', () => {
+cron.schedule('* 1 * * *', () => {
 	mongodb.MongoClient.connect(mongo_url, options).then( mongo_client => { 
 		console.log('Downloading and Parsing New Data.');
 		fetch(astro_data_url)
