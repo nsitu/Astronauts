@@ -1,0 +1,23 @@
+{
+  "name": "astronauts",
+  "version": "1.0.0",
+  "description": "Show pictures of astronauts currently in space using data from via Open Notify and WikiMedia",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nsitu/Astronauts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nsitu/Astronauts/issues"
+  },
+  "homepage": "https://github.com/nsitu/Astronauts#readme"
+}
