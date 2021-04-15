@@ -1,9 +1,9 @@
 body,
 html {
-  color: #eeeeee;
+	font-family: 'Lato', sans-serif;
+  	color: #eeeeee;
 	margin: 0;
 	padding: 0;
-	font-family: 'Helvetica', sans-serif;
 	background: rgb(26, 188, 156);
 	background: -moz-linear-gradient(-45deg, rgba(26, 188, 156, 1) 0%, rgba(142, 68, 173, 1) 100%);
 	background: -webkit-linear-gradient(-45deg, rgba(26, 188, 156, 1) 0%, rgba(142, 68, 173, 1) 100%);
@@ -13,17 +13,18 @@ html {
 h1 {
 	font-size:60px;
 	margin: 10px 0 0 0;
-	font-weight: lighter;
   text-align: center;
   padding: 0;
+  font-weight: 700;
 }
 
 h2 {
-	font-size: 24px;
+	font-size: 28px;
 	margin: 10px 0 0 0;
 	font-weight: lighter;
   text-align: center;
 	color: #eeeeee;
+	font-weight: 700;
 }
 
 a {
@@ -31,8 +32,8 @@ a {
 }
 
 p {
-	font-size: 14px;
-	font-weight: light;
+	font-size: 16px;
+	font-weight: 300;
 }
 
 header, footer{
@@ -76,19 +77,20 @@ Animations by Mario:  https://codepen.io/MarioDesigns/pen/woJgeo
 
 .container {
 	width: 100%;
-	height: 500px;
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+ 	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+	padding : 50px 0;
 }
 
 .avatar {
 	width: 400px;
 	height: 400px;
-  padding: 50px;
-  background-size: cover;
+	padding: 50px;
+	background-size: cover;
 	box-sizing: border-box;
 	border: 5px white solid;
 	border-radius: 50%;
@@ -96,11 +98,43 @@ Animations by Mario:  https://codepen.io/MarioDesigns/pen/woJgeo
 	box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
 	transform: translatey(0px);
 	animation: float 6s ease-in-out infinite;
+	flex-basis:400px;
+
 }
 
 .content {
-	max-width: 50%;
+	flex-basis:60%;
+	max-width: 80%;
 	padding: 20px 40px;
 	box-sizing: border-box;
 	text-align: center;
+}
+
+.content h2 a{
+	text-decoration: none;
+	color:rgba(255, 255, 255, 0.7);
+}
+.content h2 a:hover{
+	color:rgba(255, 255, 255, 0.9);
+}
+
+p.snippet{
+	font-size: 1.3em;
+}
+
+p.wikiArticle,
+p.wikiArticle a,
+p.photoCredit,
+p.photoCredit a{
+	text-transform: uppercase;
+	color:rgba(255, 255, 255, 0.6);
+	font-size: 12px;
+}
+
+p.wikiArticle .wikiLink{
+	background: url('wikipedia.svg');
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size:contain;
+	padding: 6px 0px 6px 36px;
 }
